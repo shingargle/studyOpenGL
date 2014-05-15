@@ -472,6 +472,7 @@
 				FAF31DC41924792900D3E413 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FAF31DC51924792900D3E413 /* Build configuration list for PBXNativeTarget "StudyOpenGLTests" */ = {
 			isa = XCConfigurationList;
@@ -480,6 +481,7 @@
 				FAF31DC71924792900D3E413 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

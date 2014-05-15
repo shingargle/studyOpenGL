@@ -10,5 +10,8 @@
 #import <GLKit/GLKit.h>
 
 @interface ViewController : GLKViewController
-
+{
+    float mTime;
+    GLKBaseEffect* mEffect;
+}
 @end
