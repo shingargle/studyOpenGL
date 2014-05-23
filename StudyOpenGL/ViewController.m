@@ -28,30 +28,95 @@
     
     glGenBuffers(1, &mBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, mBuffer);
-    static	float	sVerts[] =
-    {	 1,	 1,	 1,
-        1,	-1,	-1,
-        -1,	 1,	-1,
+    static	float	sVerts[] ={/*
+     -1, -1, -1,//0
+     1, -1, -1,//1
+     1, 1, -1,//2
+     -1, 1, -1,//3
+     -1, -1, 1,//4
+     1, -1, 1,//5
+     1, 1, 1,//6
+     -1, 1, 1,//7
+                                */
+     -1, -1, -1,//0
+     1, -1, -1,//1
+     -1, 1, -1,//3
+     1, 1, -1,//2
         
-        1,	-1,	-1,
-        -1,	 1,	-1,
-        -1,	-1,	 1,
+     1, 1, -1,//2
+     -1, 1, -1,//3
+     1, 1, 1,//6
+     -1, 1, 1,//7
         
-        -1,	 1,	-1,
-        -1,	-1,	 1,
-        1,	 1,	 1,
+     -1, 1, 1,//7
+     -1, -1, 1,//4
+     1, 1, 1,//6
+     1, -1, 1,//5
         
-        -1,	-1,	 1,
-        1,	 1,	 1,
-        1,	-1,	-1
+     1, -1, 1,//5
+     -1, -1, 1,//4
+     1, -1, -1,//1
+     -1, -1, -1,//0
+        
+     -1, -1, -1,//0
+     -1, -1, 1,//4
+     -1, 1, -1,//3
+     -1, 1, 1,//7
+        
+     -1, 1, 1,//7
+     -1, -1, 1,//4
+     1, 1, 1,//6
+     1, -1, 1,//5
+        
+     1, -1, 1,//5
+     1, 1, 1,//6
+     1, -1, -1,//1
+     1, 1, -1,//2
+        
+        
+        
     };
+    
+    /*    {	-1,	-1,	-1, //p1
+       -1,	-1,	1, //p2
+        -1,	1,	-1,//p3
+        -1,	1,	1, //p4
+        
+        -1,	-1,	-1, //p1
+        -1,	1,	-1, //p3
+        1,	-1,	-1, //p5
+        1,	1,	-1, //p7
+        
+        -1,	-1,	-1, //p1
+        1,	-1,	-1, //p5
+       -1,	-1,	1, //p2
+        1,	-1,	1, //p6
+        
+       1,	1,	1, //p8
+        1,	-1,	1, //p6
+        1,	1,	-1, //p7
+        1,	-1,	-1, //p5
+        
+       1,	1,	1, //p8
+        -1,	1,	1, //p4
+        1,	-1,	1, //p6
+       -1,	-1,	1, //p2
+        
+       1,	1,	1, //p8
+        1,	1,	-1, //p7
+        -1,	1,	1, //p4
+        -1,	1,	-1,//p3
+    };*/
     glBufferData(GL_ARRAY_BUFFER, sizeof(sVerts), sVerts, GL_STATIC_DRAW);
     
     static	GLKVector4	sColors[] =
-    {	{	 1,	 0,	 0,	 1	}
+    {
+        {	 1,	 0,	 0,	 1	}
 		,	{	 1,	 0,	 0,	 1	}
 		,	{	 1,	 0,	 0,	 1	}
+		,	{	 1,	 0,	 0,	 1	}
         
+		,	{	 0,	 0,	 1,	 1	}
 		,	{	 0,	 0,	 1,	 1	}
 		,	{	 0,	 0,	 1,	 1	}
 		,	{	 0,	 0,	 1,	 1	}
@@ -59,15 +124,34 @@
 		,	{	 0,	 1,	 0,	 1	}
 		,	{	 0,	 1,	 0,	 1	}
 		,	{	 0,	 1,	 0,	 1	}
+		,	{	 0,	 1,	 0,	 1	}
         
 		,	{	 0,	 1,	 1,	 1	}
 		,	{	 0,	 1,	 1,	 1	}
 		,	{	 0,	 1,	 1,	 1	}
+		,	{	 0,	 1,	 1,	 1	}
+        
+		,	{	 1,	 1,	 0,	 1	}
+		,	{	 1,	 1,	 0,	 1	}
+		,	{	 1,	 1,	 0,	 1	}
+		,	{	 1,	 1,	 0,	 1	}
+        
+       ,    {	 1,	 0,	 0,	 0	}
+		,	{	 1,	 0,	 0,	 0	}
+		,	{	 1,	 0,	 0,	 0	}
+		,	{	 1,	 0,	 0,	 0	}
+        
+       ,    {	 1,	 1,	 1,	 1	}
+		,	{	 1,	 1,	 1,	 1	}
+		,	{	 1,	 1,	 1,	 1	}
+		,	{	 1,	 1,	 1,	 1	}
     };
+    
     glGenBuffers(1, &cBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, cBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(sColors), sColors, GL_STATIC_DRAW);
     
+    // 色々考えろ。と伝えている箇所
     ((GLKView*)self.view).drawableDepthFormat = GLKViewDrawableDepthFormat24;
 	glEnable( GL_DEPTH_TEST );
 }
@@ -86,7 +170,7 @@
 
 - (void) update
 {
-    mTime += self.timeSinceLastUpdate;
+    mTime = mTime + self.timeSinceLastUpdate * 2;
 }
 
 //GLKBaseEffect を使って３角形を描画する。(3次元にお試し改良)
@@ -115,9 +199,9 @@
     
     glEnableVertexAttribArray( GLKVertexAttribPosition );
     glEnableVertexAttribArray( GLKVertexAttribColor );
-    glDrawArrays( GL_TRIANGLES, 0, 12 );
-    glDisableVertexAttribArray( GLKVertexAttribColor );
+    glDrawArrays( GL_TRIANGLE_STRIP, 0, 28 );
     glDisableVertexAttribArray( GLKVertexAttribPosition );
+    glDisableVertexAttribArray( GLKVertexAttribColor );
 }
 
 @end
