@@ -7,6 +7,13 @@
 //
 
 #import "ViewController.h"
+@interface ViewController()
+{
+    float mTime;
+    GLKBaseEffect* mEffect;
+    GLuint mBuffer;
+}
+@end
 
 @implementation ViewController
 - (void) viewDidAppear:(BOOL)animated
@@ -21,24 +28,24 @@
     glGenBuffers(1, &mBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, mBuffer);
     
-    static float wData[ 6 ];
-    for ( int i = 0; i < 3; i++ )
-    {
-        wData[ i * 2 + 0 ] = sin( 2 * M_PI * i / 3 );
-        wData[ i * 2 + 1 ] = cos( 2 * M_PI * i / 3 );
-    }
-    glBufferData(GL_ARRAY_BUFFER, sizeof(wData), wData, GL_STATIC_DRAW);
-    
-    //----------
-    glGenBuffers(1, &tBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, tBuffer);
-    static float tData[] =
-    {
-        0,   0.5,
-        -0.5,  -0.5,
-        0.5,  -0.5,
+    static	float	sVerts[] =
+    {	 1,	 1,	 1,
+        1,	-1,	-1,
+        -1,	 1,	-1,
+        
+        1,	-1,	-1,
+        -1,	 1,	-1,
+        -1,	-1,	 1,
+        
+        -1,	 1,	-1,
+        -1,	-1,	 1,
+        1,	 1,	 1,
+        
+        -1,	-1,	 1,
+        1,	 1,	 1,
+        1,	-1,	-1
     };
-    glBufferData(GL_ARRAY_BUFFER, sizeof(tData), tData, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(sVerts), sVerts, GL_STATIC_DRAW);
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -48,6 +55,7 @@
     mEffect = nil;
     ((GLKView*)self.view).context = nil;
     // -----------
+    glDeleteBuffers(1, &mBuffer);
 }
 
 - (void) update
@@ -60,26 +68,26 @@
 - (void) glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    mEffect.transform.modelviewMatrix = GLKMatrix4MakeYRotation(mTime);
+    
+    mEffect.transform.modelviewMatrix = GLKMatrix4Rotate(	GLKMatrix4MakeScale( .5, .5, .5 )
+                                                                ,	mTime
+                                                                ,	1
+                                                                ,	1
+                                                                ,	1
+                                                                );
     mEffect.transform.projectionMatrix = GLKMatrix4MakeScale( 1, view.bounds.size.width / view.bounds.size.height, 1 );
     [mEffect prepareToDraw];
 
-    //頂点データを有効
-    glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glBindBuffer(GL_ARRAY_BUFFER, tBuffer);
-    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 8, 0);
-    /*
-     引数１：        種類：頂点データ
-     引数２：      次元数：２
-     引数３：          型：float
-     引数４：ノーマライズ：しない（引数が整数で与えられた時のコンバージョンを方法）
-     引数５：  ストライド：８
-     引数６：    実データ：sData
-     */
-    
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-    glDisableVertexAttribArray(GLKVertexAttribPosition);
+    [self draw];
 }
-
+- (void) draw
+{
+    glBindBuffer( GL_ARRAY_BUFFER, mBuffer );
+    glVertexAttribPointer( GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0 );
+    
+    glEnableVertexAttribArray( GLKVertexAttribPosition );
+    glDrawArrays( GL_TRIANGLES, 0, 12 );
+    glDisableVertexAttribArray( GLKVertexAttribPosition );
+}
 
 @end
