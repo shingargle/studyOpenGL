@@ -12,6 +12,7 @@
     float mTime;
     GLKBaseEffect* mEffect;
     GLuint mBuffer;
+    GLuint cBuffer;
 }
 @end
 
@@ -27,7 +28,6 @@
     
     glGenBuffers(1, &mBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, mBuffer);
-    
     static	float	sVerts[] =
     {	 1,	 1,	 1,
         1,	-1,	-1,
@@ -46,6 +46,30 @@
         1,	-1,	-1
     };
     glBufferData(GL_ARRAY_BUFFER, sizeof(sVerts), sVerts, GL_STATIC_DRAW);
+    
+    static	GLKVector4	sColors[] =
+    {	{	 1,	 0,	 0,	 1	}
+		,	{	 1,	 0,	 0,	 1	}
+		,	{	 1,	 0,	 0,	 1	}
+        
+		,	{	 0,	 0,	 1,	 1	}
+		,	{	 0,	 0,	 1,	 1	}
+		,	{	 0,	 0,	 1,	 1	}
+        
+		,	{	 0,	 1,	 0,	 1	}
+		,	{	 0,	 1,	 0,	 1	}
+		,	{	 0,	 1,	 0,	 1	}
+        
+		,	{	 0,	 1,	 1,	 1	}
+		,	{	 0,	 1,	 1,	 1	}
+		,	{	 0,	 1,	 1,	 1	}
+    };
+    glGenBuffers(1, &cBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, cBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(sColors), sColors, GL_STATIC_DRAW);
+    
+    ((GLKView*)self.view).drawableDepthFormat = GLKViewDrawableDepthFormat24;
+	glEnable( GL_DEPTH_TEST );
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -56,6 +80,8 @@
     ((GLKView*)self.view).context = nil;
     // -----------
     glDeleteBuffers(1, &mBuffer);
+    glDeleteBuffers(1, &cBuffer);
+    
 }
 
 - (void) update
@@ -84,9 +110,13 @@
 {
     glBindBuffer( GL_ARRAY_BUFFER, mBuffer );
     glVertexAttribPointer( GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0 );
+    glBindBuffer( GL_ARRAY_BUFFER, cBuffer );
+    glVertexAttribPointer( GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0 );
     
     glEnableVertexAttribArray( GLKVertexAttribPosition );
+    glEnableVertexAttribArray( GLKVertexAttribColor );
     glDrawArrays( GL_TRIANGLES, 0, 12 );
+    glDisableVertexAttribArray( GLKVertexAttribColor );
     glDisableVertexAttribArray( GLKVertexAttribPosition );
 }
 
