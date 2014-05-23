@@ -13,5 +13,7 @@
 {
     float mTime;
     GLKBaseEffect* mEffect;
+    GLuint mBuffer;
+    GLuint tBuffer;
 }
 @end

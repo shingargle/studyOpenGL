@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA19BA1C192ED88B008BD1DE /* sample1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA19BA1B192ED88B008BD1DE /* sample1.jpg */; };
 		FAF31D8C1924792800D3E413 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF31D8B1924792800D3E413 /* Foundation.framework */; };
 		FAF31D8E1924792800D3E413 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF31D8D1924792800D3E413 /* CoreGraphics.framework */; };
 		FAF31D901924792800D3E413 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF31D8F1924792800D3E413 /* UIKit.framework */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA19BA1B192ED88B008BD1DE /* sample1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = sample1.jpg; path = ../../../../../Desktop/sample1.jpg; sourceTree = "<group>"; };
 		FAF31D881924792800D3E413 /* StudyOpenGL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyOpenGL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF31D8B1924792800D3E413 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FAF31D8D1924792800D3E413 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -140,6 +142,7 @@
 		FAF31D961924792800D3E413 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FA19BA1B192ED88B008BD1DE /* sample1.jpg */,
 				FAF31D971924792800D3E413 /* StudyOpenGL-Info.plist */,
 				FAF31D981924792800D3E413 /* InfoPlist.strings */,
 				FAF31D9B1924792800D3E413 /* main.m */,
@@ -247,6 +250,7 @@
 				FAF31DA51924792800D3E413 /* Shader.fsh in Resources */,
 				FAF31D9A1924792800D3E413 /* InfoPlist.strings in Resources */,
 				FAF31DA31924792800D3E413 /* Main.storyboard in Resources */,
+				FA19BA1C192ED88B008BD1DE /* sample1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
